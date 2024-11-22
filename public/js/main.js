@@ -3,7 +3,7 @@ function el(target) {
 }
 
 let pre = `http://localhost:5200`; 
-pre = `https://office.boxcar.site`;
+// pre = `https://office.boxcar.site`;
 
 customerRoot = el('#customerRoot');
 
@@ -32,29 +32,25 @@ function htmlFetchAllCustomer(data){
 
     data.forEach(d => {
         html += `
-        <div class="chip shadow" id="chip${d.custId}">
+        <div class="chip shadow " id="chip${d.custId}">
             <a href="#" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1"> 
-                    <span class="badge bg-dark me-1">
-                    ${d.jobs.length}</span> ${d.fname} ${d.lname}
-                </h5>
+                    <h5 class="mb-1"> 
+                        <span class="badge bg-primary me-1">
+                        ${d.jobs.length}</span> ${d.fname} ${d.lname}
+                    </h5>
 
-                <small class="text-secondary">${d.date}</small>
+                    <small class="text-secondary">${d.date}</small>
                 </div>
-                <p class="mb-1">${d.address} - ${d.city}</p>
 
-                <div class="row">
-                    <div class="col-5">
-                        <small class="text-secondary">${d.city}, ${d.state} ${d.zip}</small>
-                    </div>
-                    <div class="col-7">
-                        
-                        ${customerBtn(d.custId)}
-                        ${jobBtn(d.custId)}
-
-                    </div>
+                <p class="m-0">${d.address} - ${d.city}</p>
+                <small class="text-secondary">${d.city}, ${d.state} ${d.zip}</small> <br>        
+                <div class="d-flex justify-content-end">                         
+                    ${customerBtn(d.custId)} 
+                    ${jobBtn(d.custId)}
                 </div>
+
+           
             </a> 
             <div class="job-chip" id="jobChip${d.custId}">
 
@@ -82,13 +78,15 @@ function htmlFetchAllCustomer(data){
 function jobCard(data){
     let html = `
     
-    <div class="job-card card mx-auto" style="width: 30rem;">
+    <div class="job-card card mx-auto" style="width: 100%;">
         <div class="card-body">
             <h5 class="card-title">${data.jName}
             <span class="float-end">${data.jDate}</span></h5>
-            <p class="card-text">${data.jPhone}</p>
-            <p class="card-text">${data.jAddress} - ${data.jCity}</p>
-            <p class="card-text">${data.status}</p>
+            <p class="card-text m-0 p-0">Phone: ${data.jPhone}</p>
+            <p class="card-text m-0 p-0">${data.jAddress} - ${data.jCity}</p>
+            <p class="card-text m-0 p-0">${data.status}</p>
+            <a href="${data.jImg}">Img</a>
+            <a href="${data.jScope} || '' ">Scope</a>
         </div>
         </div>
     

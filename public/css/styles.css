@@ -1,12 +1,20 @@
+@media only screen and (max-width: 400px) {
+    * {
+        font-size: 13px;
+        line-height: 15px;
+    }
+    
+}
 
 .bg-green {
     background-color: rgb(28, 129, 19);
 }
 body {
     background-color: rgb(231, 231, 231);
+    
 }
 .navbar {
-    height:6vh;
+    height:7vh;
     background-color: rgb(28, 129, 19);
 }
 .app {
@@ -16,7 +24,7 @@ body {
     background-color: rgb(223, 223, 223);
 }
 .wrapper {
-    height: 94vh;
+    height: 93vh;
     overflow: hidden;
 }
 .notification {
