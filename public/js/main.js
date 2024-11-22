@@ -3,7 +3,7 @@ function el(target) {
 }
 
 let pre = `http://localhost:5200`; 
-// pre = `https://office.boxcar.site`;
+pre = `https://office.boxcar.site`;
 
 customerRoot = el('#customerRoot');
 
