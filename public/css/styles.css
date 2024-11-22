@@ -9,9 +9,12 @@
 .bg-green {
     background-color: rgb(28, 129, 19);
 }
-body {
-    background-color: rgb(231, 231, 231);
-    
+* {
+
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 15px;
 }
 .navbar {
     height:7vh;
@@ -21,7 +24,7 @@ body {
     max-width: 39rem ;
     width: 100vw;
     margin: auto;
-    background-color: rgb(223, 223, 223);
+    background-color: rgb(255, 255, 255);
 }
 .wrapper {
     height: 93vh;
@@ -42,6 +45,7 @@ body {
     height: 94vh;
     width: 100%;
     overflow-y: scroll;
+    background-color: rgb(223, 223, 223);  
 }
 .job-root {
     height: 48vh;
@@ -51,19 +55,22 @@ body {
 }
 
 .job-chip {
-        
-    background-color: rgb(59, 59, 59);
-    box-shadow: inset 1px 1px 1px 1px #a8a8a8;
-    padding: 4px;
+      
+    padding: 0px;
+    padding-left: 3px;
+    padding-right: 3px;
     display: none;
-    width: 100%;
+    width: 90%;
     height: 80vh;
     transition: width 2s;
     overflow-y: auto;
-    margin: auto;
+    float: right;
+    padding-bottom: 10px;
+
 
 }
 .job-card {
     margin-top: 5px;
+    border-radius: 0px;
+    
 }
-

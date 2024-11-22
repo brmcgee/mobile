@@ -30,14 +30,17 @@ function htmlFetchAllCustomer(data){
 
     let html = `<div class="list-group">`;
 
+    // chip 
     data.forEach(d => {
         html += `
         <div class="chip shadow " id="chip${d.custId}">
             <a href="#" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1"> 
-                        <span class="badge bg-primary me-1">
-                        ${d.jobs.length}</span> ${d.fname} ${d.lname}
+                        <span class="badge bg-green me-1">
+                            ${d.jobs.length}
+                        </span> 
+                        ${d.fname} ${d.lname}
                     </h5>
 
                     <small class="text-secondary">${d.date}</small>
@@ -55,6 +58,8 @@ function htmlFetchAllCustomer(data){
             <div class="job-chip" id="jobChip${d.custId}">
 
             `
+ 
+    if (d.jobs.length == 0) { html += '<br>' + alertMessage('primary', 'No job records..') }
     let jobs = d.jobs;
     jobs.forEach(job => {
         if (job) { html += jobCard(job)}
@@ -71,22 +76,21 @@ function htmlFetchAllCustomer(data){
     // html += modal('All Jobs');
     return html;
 
-
 }
 
 
 function jobCard(data){
     let html = `
     
-    <div class="job-card card mx-auto" style="width: 100%;">
-        <div class="card-body">
+    <div class="job-card card mx-auto rounded-0">
+        <div class="card-body ">
             <h5 class="card-title">${data.jName}
             <span class="float-end">${data.jDate}</span></h5>
             <p class="card-text m-0 p-0">Phone: ${data.jPhone}</p>
             <p class="card-text m-0 p-0">${data.jAddress} - ${data.jCity}</p>
-            <p class="card-text m-0 p-0">${data.status}</p>
-            <a href="${data.jImg}">Img</a>
-            <a href="${data.jScope} || '' ">Scope</a>
+            <p class="card-text m-0 p-0">${getIcon(data.status)}${data.status}</p>
+            <a href="https://office.boxcar.site/${data.jImg || ''}">Img</a>
+            <a href="https://office.boxcar.site/${data.jScope || ''}  ">Scope</a>
         </div>
         </div>
     
@@ -167,6 +171,28 @@ function modal(title){
         </div>
         </div>
     `;
+}
+function getIcon(status){
+
+    if (status == 'Scheduled') {
+        return '<img class="pe-1 pb-1" src="https://office.boxcar.site/public/assets/icons/schedule-r.png" alt="" width="25">';
+    }
+    if (status == 'Ordered') {
+        return '<img class="pe-1 pb-1" src="https://office.boxcar.site/public/assets/icons/order-p.png" alt="" width="25">';
+    }
+    if (status == 'In-Progress') {
+        return '<img class="pe-1 pb-1" src="https://office.boxcar.site/public/assets/icons/in-progress-b.png" alt="" width="25">';
+    }
+    if (status == 'Estimate') {
+        return '<img class="pe-1 pb-1" src="https://office.boxcar.site/public/assets/icons/contract-pink.png" alt="" width="25">';
+    }
+    if (status == 'Completed') {
+        return '<img class="pe-1 pb-1" src="https://office.boxcar.site/public/assets/icons/done-green.png" alt="" width="25">';
+    } else {
+        return '<img class="pe-1 pb-1" src="https://office.boxcar.site/public/assets/icons/error-red.png" alt="" width="25">';
+    }
+
+
 }
 
 document.addEventListener("DOMContentLoaded", fetchAllCustomers())
