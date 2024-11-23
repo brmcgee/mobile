@@ -125,7 +125,7 @@ function modal(title){
         <div class="modal fade" id="customerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen mx-auto" style="max-width:44rem;">
             <div class="modal-content rounded-0 ">
-            <div class="modal-header bg-success rounded-0 text-white">
+            <div class="modal-header bg-dark rounded-0 text-white">
                 <h1 class="modal-title fs-5" id="customerModalLabel">${title}</h1>
                 <button type="button" class="btn-close text-white bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -141,97 +141,87 @@ function fetchCustomerModal(target){
     let t = document.getElementById(target);
     let html = `
     
-    <div id="customerForm" class="m-0 p-0">
+    <div id="customerForm" class="m-0 p-0 mt-2">
        <div class="add-customer col-12 mx-auto bm-page">
 
-           <form action="" method="POST" id="addCustomer">
+           <form action="" method="POST" id="addCustomer">           
    
-               <div class="row pb-2 pt-3">
-   
-                   <div class="col-sm-12 col-md-3">
-                       <label for="fname" class="form-label">First:</label>
-                       <input type="text" class="form-control" id="fname" name="fname" required>
-                   </div>
+                <div class="row">
+                    <div class="col-2"><label for="fname" class="form-label">First:</label></div>
+                    <div class="col-10">  <input type="text" class="form-control" id="fname" name="fname" required></div>          
+                </div>
            
-                   <div class="col-sm-12 col-md-3">
-                       <label for="lname" class="form-label">Last:</label>
-                       <input type="text" class="form-control" id="lname" name="lname" required>
-                   </div>
+                <div class="row">
+                    <div class="col-2"><label for="lname" class="form-label">Last:</label></div>
+                    <div class="col-10"><input type="text" class="form-control" id="lname" name="lname" required></div>                        
+                </div>
    
-                   <div class="col-sm-8 col-md-4">
-                       <label for="date" class="form-label">Date:</label>
-                       <input type="date" class="form-control" id="date" required name="date">
-                   </div>
+                <div class="row">
+                    <div class="col-2"><label for="date" class="form-label">Date:</label></div>
+                    <div class="col-10"> <input type="date" class="form-control" id="date" required name="date"></div>     
+                </div>
 
-                   <div class="col-sm-4 col-md-2">
-                       <label for="custId" hidden class="form-label">CustId:</label>
-                       <input type="text" hidden class="form-control" id="custId" value=""  name="custId" disabled>
-                   </div>
+                <div class="row">
+                    <div class="col-2"><label for="custId" hidden class="form-label">CustId:</label></div>
+                    <div class="col-10"> <input type="text" hidden class="form-control" id="custId" name="custId" disabled></div>
+                </div>
    
-               </div>
+             
    
-               <div class="row pb-2">
+                <div class="row">
+                    <div class="col-2"><label for="phone" class="form-label">Phone:</label></div>
+                    <div class="col-10"> <input type="tel" class="form-control" id="phone" required placeholder="Format: 123-456-7890" 
+                                        name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"> </div>
+                </div>
+                       
    
-                   <div class="col-12 col-sm-6">
-                       <label for="phone" class="form-label">Phone:</label>
-                       <input type="tel" class="form-control" id="phone" required placeholder="Format: 123-456-7890" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
-                   </div>
+                <div class="row">
+                    <div class="col-2"><label for="cell" class="form-label">Cell:</label></div>
+                    <div class="col-10"><input type="tel" class="form-control" id="cell" placeholder="Format: 123-456-7890" 
+                            name="cell" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"></div>
+                </div>
    
-                   <div class="col-12 col-sm-6">
-                       <label for="cell" class="form-label">Cell:</label>
-                       <input type="tel" class="form-control" id="cell" placeholder="Format: 123-456-7890" name="cell" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
-                   </div>
-   
-   
-               </div>
-   
-               <div class="row pb-2">
 
-                   <div class="col-sm-12 col-md-6">
-                       <label for="address" class="form-label">Address:</label>
-                       <input type="text" class="form-control" id="address" required name="address">
-                   </div>
+                <div class="row">
+                    <div class="col-2"><label for="address" class="form-label">Address:</label></div>
+                    <div class="col-10"><input type="text" class="form-control" id="address" required name="address"></div>
+                </div>
 
-                   <div class="col-sm-12 col-md-6">
-                       <label for="email" class="form-label">Email:</label>
-                       <input type="email" class="form-control" id="email" name="email">
-                   </div>
-      
-               </div>    
-               
-               <div class="row pb-2">
-                   <div class="col-sm-12 col-md-6">
-                       <label for="city" class="form-label">City:</label>
-                       <input type="text" class="form-control" id="city" name="city">
-                   </div>
+                <div class="row">
+                    <div class="col-2"><label for="email" class="form-label">Email:</label></div>
+                    <div class="col-10"><input type="email" class="form-control" id="email" name="email"></div>         
+                </div>
+                             
+                <div class="row">
+                    <div class="col-2"><label for="city" class="form-label">City:</label></div>
+                    <div class="col-10"> <input type="text" class="form-control" id="city" name="city"></div>
+                </div>
    
-                   <div class="col-sm-6 col-md-3">
-                       <label for="state" class="form-label">State:</label>
-                       <input type="text" class="form-control" id="state" name="state">
-                   </div>   
+                <div class="row">
+                    <div class="col-2"><label for="state" class="form-label">State:</label></div>
+                    <div class="col-10"><input type="text" class="form-control" id="state" name="state"></div>  
+                </div>   
                    
-                   <div class="col-sm-6 col-md-3">
-                       <label for="zip" class="form-label">Zip:</label>
-                       <input type="text" class="form-control" id="zip"  name="zip">
-                   </div>        
-               </div>
+                <div class="row">
+                    <div class="col-2"> <label for="zip" class="form-label">Zip:</label></div>
+                    <div class="col-10"> <input type="text" class="form-control" id="zip"  name="zip"></div>   
+                </div>        
+            
    
-               <div class="row pb-2">
-                   <div class="col-sm-12">
-                       <label for="notes" class="form-label">Notes:</label>
-                       <textarea type="text" class="form-control" id="notes" placeholder="Notes" name="notes" rows="13"></textarea>
-                   </div>
-                   <div class="col-12">
-                        <label for="img" class="form-label">Img:</label>
-                       <input type="img" class="form-control" id="img"  name="img">
-                   </div>
-   
-   
-               </div>
-               <div class="form-footer d-flex justify-content-end">
+                <div class="row">
+                    <div class="col-2"><label for="notes" class="form-label">Notes:</label></div>
+                    <div class="col-10"><textarea type="text" class="form-control" id="notes" placeholder="Notes" name="notes" rows="10"></textarea></div> 
+                </div>
+
+                <div class="row">
+                    <div class="col-2"> <label for="img" class="form-label">Img:</label></div>
+                    <div class="col-10"> <input type="img" class="form-control" id="img"  name="img"></div>    
+                </div>
+              
+                <div class="form-footer d-flex justify-content-end mt-2">
                    <button type="button" class="btn btn-danger me-1" data-bs-dismiss="modal">Close</button>
                    <button type="button" onclick="handleUpdateCustomerRecord()" data-bs-dismiss="modal" class="btn btn-success">Save</button>
-               </div>
+                </div>
    
          </form>
    
@@ -283,101 +273,100 @@ function handleAddCustomer() {
 
 // add customer functions 
 function modalAddCustomer(title){
+
+
     return `
         <div class="modal fade" id="addCustomerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen mx-auto" style="max-width:44rem;" >
             <div class="modal-content rounded-0 ">
-            <div class="modal-header bg-success rounded-0 text-white">
+
+            <div class="modal-header bg-dark rounded-0 text-white">
                 <h1 class="modal-title fs-5" id="customerModalLabel">${title}</h1>
                 <button type="button" class="btn-close text-white bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+
                 <div class="modal-body" id="addCustomerModalBody" >
                  
     
-    <div id="customerForm" class="m-0 p-0">
-       <div class="add-customer col-12 mx-auto bm-page">
+                <div id="customerForm" class="m-0 p-0">
+                <div class="add-customer col-12 mx-auto bm-page">
 
-           <form action="http://localhost:5200/add-customer" method="POST" id="addCustomer">
-   
-               <div class="row pb-2 pt-3">
-   
-                   <div class="col-sm-12 col-md-3">
-                       <label for="fname" class="form-label">First:</label>
-                       <input type="text" class="form-control" id="fname" name="fname" required>
-                   </div>
+                <form action="http://localhost:5200/add-customer" method="POST" id="addCustomer">
+                
+                            
+                        
+                <div class="row">
+                    <div class="col-2"><label for="fname" class="form-label">First:</label></div>
+                    <div class="col-10">  <input type="text" class="form-control" id="fname" name="fname" required></div>          
+                </div>
            
-                   <div class="col-sm-12 col-md-3">
-                       <label for="lname" class="form-label">Last:</label>
-                       <input type="text" class="form-control" id="lname" name="lname" required>
-                   </div>
+                <div class="row">
+                    <div class="col-2"><label for="lname" class="form-label">Last:</label></div>
+                    <div class="col-10"><input type="text" class="form-control" id="lname" name="lname" required></div>                        
+                </div>
    
-                   <div class="col-sm-8 col-md-4">
-                       <label for="date" class="form-label">Date:</label>
-                       <input type="date" class="form-control" id="date" required name="date">
-                   </div>
+                <div class="row">
+                    <div class="col-2"><label for="date" class="form-label">Date:</label></div>
+                    <div class="col-10"> <input value=${getCurrentTime()} type="text" class="form-control" id="date" required name="date"></div>     
+                </div>
 
-                   <div class="col-sm-4 col-md-2">
-                       <label for="custId" hidden class="form-label">CustId:</label>
-                       <input type="text" hidden class="form-control" id="custId" value=""  name="custId" disabled>
-                   </div>
+                <div class="row">
+                    <div class="col-2"><label for="custId" hidden class="form-label">CustId:</label></div>
+                    <div class="col-10"> <input type="text" hidden class="form-control" id="custId" name="custId" disabled></div>
+                </div>
    
-               </div>
+             
    
-               <div class="row pb-2">
+                <div class="row">
+                    <div class="col-2"><label for="phone" class="form-label">Phone:</label></div>
+                    <div class="col-10"> <input type="tel" class="form-control" id="phone" required name="phone"> </div>
+                </div>
+                       
    
-                   <div class="col-12 col-sm-6">
-                       <label for="phone" class="form-label">Phone:</label>
-                       <input type="tel" class="form-control" id="phone" required placeholder="Format: 123-456-7890" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
-                   </div>
+                <div class="row">
+                    <div class="col-2"><label for="cell" class="form-label">Cell:</label></div>
+                    <div class="col-10"><input type="tel" class="form-control" id="cell" placeholder="Format: 123-456-7890" name="cell"></div>
+                </div>
    
-                   <div class="col-12 col-sm-6">
-                       <label for="cell" class="form-label">Cell:</label>
-                       <input type="tel" class="form-control" id="cell" placeholder="Format: 123-456-7890" name="cell" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
-                   </div>
-   
-   
-               </div>
-   
-               <div class="row pb-2">
 
-                   <div class="col-sm-12 col-md-6">
-                       <label for="address" class="form-label">Address:</label>
-                       <input type="text" class="form-control" id="address" required name="address">
-                   </div>
+                <div class="row">
+                    <div class="col-2"><label for="address" class="form-label">Address:</label></div>
+                    <div class="col-10"><input type="text" class="form-control" id="address" required name="address"></div>
+                </div>
 
-                   <div class="col-sm-12 col-md-6">
-                       <label for="email" class="form-label">Email:</label>
-                       <input type="email" class="form-control" id="email" name="email">
-                   </div>
-      
-               </div>    
-               
-               <div class="row pb-2">
-                   <div class="col-sm-12 col-md-6">
-                       <label for="city" class="form-label">City:</label>
-                       <input type="text" class="form-control" id="city" name="city">
-                   </div>
+                <div class="row">
+                    <div class="col-2"><label for="email" class="form-label">Email:</label></div>
+                    <div class="col-10"><input type="email" class="form-control" id="email" name="email"></div>         
+                </div>
+                             
+                <div class="row">
+                    <div class="col-2"><label for="city" class="form-label">City:</label></div>
+                    <div class="col-10"> <input type="text" class="form-control" id="city" name="city"></div>
+                </div>
    
-                   <div class="col-sm-6 col-md-3">
-                       <label for="state" class="form-label">State:</label>
-                       <input type="text" class="form-control" id="state" name="state">
-                   </div>   
+                <div class="row">
+                    <div class="col-2"><label for="state" class="form-label">State:</label></div>
+                    <div class="col-10"><input type="text" class="form-control" id="state" name="state"></div>  
+                </div>   
                    
-                   <div class="col-sm-6 col-md-3">
-                       <label for="zip" class="form-label">Zip:</label>
-                       <input type="text" class="form-control" id="zip"  name="zip">
-                   </div>        
-               </div>
+                <div class="row">
+                    <div class="col-2"> <label for="zip" class="form-label">Zip:</label></div>
+                    <div class="col-10"> <input type="text" class="form-control" id="zip"  name="zip"></div>   
+                </div>        
+            
    
-               <div class="row pb-2">
-                   <div class="col-sm-12">
-                       <label for="notes" class="form-label">Notes:</label>
-                       <textarea type="text" class="form-control" id="notes" placeholder="Notes" name="notes" rows="13"></textarea>
-                   </div>
-   
-   
-               </div>
-               <div class="form-footer d-flex justify-content-end">
+                <div class="row">
+                    <div class="col-2"><label for="notes" class="form-label">Notes:</label></div>
+                    <div class="col-10"><textarea type="text" class="form-control" id="notes" name="notes" rows="10"></textarea></div> 
+                </div>
+
+                <div class="row">
+                    <div class="col-2"> <label for="img" class="form-label">Img:</label></div>
+                    <div class="col-10"> <input type="img" class="form-control" id="img"  name="img"></div>    
+                </div>
+
+
+               <div class="form-footer d-flex justify-content-end mt-2">
                    <button type="button" class="btn btn-danger me-1" data-bs-dismiss="modal">Close</button>
                    <button type="button" class="btn btn-secondary me-1" onclick="clearCustomerForm()">Clear</button>
                    <button type="button" onclick="handleAddCustomer()" data-bs-dismiss="modal" class="btn btn-success">Submit</button>
@@ -466,7 +455,15 @@ function handleUpdateCustomerRecord() {
 }
 
 
-// utilities
+// utilities'
+function getCurrentTime(){
+    const date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let currentDate = `${month}-${day}-${year}`;
+    return currentDate
+}
 function jobBtn(custId){
     return ` <button onclick="handleJobsBtnClick(this.id)" id="${custId}" class="btn ms-2 text-black" type="button" 
                      data-bs-toggle="modal" data-bs-target="#allJobsModal">
