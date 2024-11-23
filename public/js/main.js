@@ -154,6 +154,8 @@ function alertMessage(type, message) {
     
     `;
 }
+
+
 function modal(title){
     return `
         <div class="modal fade" id="customerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -285,7 +287,6 @@ function modalAddCustomer(title){
         </div>
     `;
 }
-
 function handleAddCustomer() {
 
     let url = `${pre}/add-customer`;
@@ -313,8 +314,7 @@ function handleAddCustomer() {
 
             if (this.readyState == 4 && this.status == 200) {
                 customerRoot.innerHTML = `${alertMessage('primary', 'Successfully added contact!')}`
-
-                
+                fetchAllCustomers();         
             }
       };
       
@@ -332,7 +332,7 @@ function fetchCustomerModal(target){
     <div id="customerForm" class="m-0 p-0">
        <div class="add-customer col-12 mx-auto bm-page">
 
-           <form action="http://localhost:5200/add-customer" method="POST" id="addCustomer">
+           <form action="" method="POST" id="addCustomer">
    
                <div class="row pb-2 pt-3">
    
@@ -409,13 +409,17 @@ function fetchCustomerModal(target){
                        <label for="notes" class="form-label">Notes:</label>
                        <textarea type="text" class="form-control" id="notes" placeholder="Notes" name="notes" rows="13"></textarea>
                    </div>
+                   <div class="col-12">
+                        <label for="img" class="form-label">Img:</label>
+                       <input type="img" class="form-control" id="img"  name="img">
+                   </div>
    
    
                </div>
                <div class="form-footer d-flex justify-content-end">
                    <button type="button" class="btn btn-danger me-1" data-bs-dismiss="modal">Close</button>
                    <button type="button" class="btn btn-secondary me-1" onclick="clearCustomerForm()">Clear</button>
-                   <button type="button" onclick="handleAddCustomer()" data-bs-dismiss="modal" class="btn btn-success">Submit</button>
+                   <button type="button" onclick="handleUpdateCustomerRecord()" data-bs-dismiss="modal" class="btn btn-success">Save</button>
                </div>
    
          </form>
@@ -427,7 +431,6 @@ function fetchCustomerModal(target){
     `;
     t.innerHTML = html;
 }
-
 async function populateCustomerModal(custId) {
     
     let url = `${pre}/customers/${custId}`
@@ -456,6 +459,46 @@ function handlePopulateCustomerModal(data) {
     el('#email').value = data[0].email;
     el('#custId').value = data[0].custId;
     el('#date').value = data[0].date;
+    el('#img').value = data[0].img;
+}
+
+function handleUpdateCustomerRecord() {
+
+
+    let custId = document.getElementById('custId').value;
+    let fname = document.getElementById('fname').value;
+    let lname = document.getElementById('lname').value;
+    let address = document.getElementById('address').value;
+    let city = document.getElementById('city').value;
+    let state = document.getElementById('state').value;
+    let zip = document.getElementById('zip').value;   
+    let phone = document.getElementById('phone').value;
+    let cell = document.getElementById('cell').value;
+    let email = document.getElementById('email').value;
+    let notes = document.getElementById('notes').value
+    let date = document.getElementById('date').value;
+    let img = document.getElementById('img').value;
+  
+    let url = `${pre}/update-customer`;
+    let params = `custId=${custId}&&fname=${fname}&&lname=${lname}&&address=${address}&&city=${city}&&state=${state}&&zip=${zip}&&phone=${phone}&&cell=${cell}&&email=${email}&&notes=${notes}&&date=${date}&&img=${img}`;
+    
+    customerRoot.innerHTML = ` ${loader('primary')} ${alertMessage('info', 'Updating record')}`;
+                                
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            customerRoot.innerHTML = `${alertMessage('info', 'Updated contact!')}`;
+            fetchAllCustomers();
+        } else {
+            customerRoot.innerHTML = alertMessage('danger', 'Error updating, please try again!')
+        }
+      };
+    xmlhttp.open("POST", url, true);
+    xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xmlhttp.send(params);
+
+                        
+
 }
 function clearCustomerForm() {
     el('#fname').value = '';
