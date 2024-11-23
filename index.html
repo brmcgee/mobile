@@ -19,10 +19,18 @@
     <div class="app">
         <nav class="navbar navbar-dark bg-green ">
             <div class="container">
-                <a editable="inline" class="navbar-brand" href="/">
-                    <img src="https://office.boxcar.site/public/assets/icons/favicon.ico" width="48" height="48" class="align-middle me-1 img-fluid" alt="My Website">
-                    backoffice</a>
-    
+                <a class="navbar-brand" href="/">
+                    <img src="https://office.boxcar.site/public/assets/icons/favicon.ico" width="25" height="25" class="align-middle me-1 img-fluid" alt="My Website">
+                        <small>backoffice</small></a>
+
+                    <div id="searchRoot" class="no-print">
+                        <form id="searchCustomerBar" class="d-flex m-0 bg-light" role="search">
+                            <input id="searchBar" class="form-control" type="search" placeholder="Search customers" 
+                                   onkeyup="handleSearchLastName(this.value)"  aria-label="Search customers" >
+                            <label for=""><i class="fa fa-search ps-2 text-primary pt-2" aria-hidden="true"></i></label>
+                        </form>    
+                    </div>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -33,7 +41,7 @@
                     <div class="offcanvas-header">
                         <div class="lc-block">
                             <div editable="rich">
-                                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">backoffice</h5>
                             </div>
                         </div>
     
@@ -42,20 +50,14 @@
                     <div class="offcanvas-body">
                         <div class="row">
                             <div class="col">
-                                <div class="lc-block mb-4">
-    
-                                    <div lc-helper="shortcode" class="live-shortcode me-auto"> <!--  lc_nav_menu -->
-                                        <ul id="menu-menu-1" class="navbar-nav">
-                                            <li class="menu-item menu-item-type-custom menu-item-object-custom nav-item nav-item-32739"><a href="https://library.livecanvas.com/starters" class="nav-link ">BS5 Page Templates</a></li>
-                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home nav-item nav-item-32738"><a href="https://library.livecanvas.com/sections/" class="nav-link ">BS5 Snippets</a></li>
-                                        </ul> <!-- /lc_nav_menu -->
-                                    </div>
-    
-    
-                                </div>
                                 <div class="lc-block">
-                                    <a class="btn btn-primary" href="#" role="button">Buy Now</a>
+                                    <a class="btn btn-primary" onclick="fetchAllCustomers()" href="#" role="button">Customers</a>
                                 </div>
+                                <ul class="py-2 ">
+                                    <li class="list-item">
+                                        <a href="https://office.boxcar.site" class="href">backoffice v.1</a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>

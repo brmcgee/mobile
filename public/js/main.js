@@ -5,9 +5,9 @@ function el(target) {
 let pre = `http://localhost:5200`; 
 pre = `https://office.boxcar.site`;
 
-customerRoot = el('#customerRoot');
+let customerRoot = el('#customerRoot');
 
-customerRoot.innerHTML = 'Testing'
+
 
 async function fetchAllCustomers() {
     customerRoot.innerHTML = loader('primary', 'Fetching records now.')
@@ -25,7 +25,96 @@ async function fetchAllCustomers() {
         customerRoot.innerHTML = alertMessage('warning', networkError)      
     }
 }
+async function handleSearchLastName(query) {
+    if (query == '') { 
+        customerRoot.innerHTML = '';
+        document.getElementById('searchBar').value = '';
+        return; 
+    }
 
+    let url = `${pre}/lname/${query}`;
+    let params = `query=${query}`;
+    var xmlhttp = new XMLHttpRequest();
+    
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            let data = JSON.parse(this.response)
+            customerRoot.innerHTML =  customerTemplate(data);
+        }
+      };
+      
+      xmlhttp.open("POST", url, true);
+      xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xmlhttp.send(params);
+      if (query == '') { customerRoot.innerHTML = ''; return; }
+}
+
+function customerTemplate(customers) {
+    let html = '';
+    html += `
+
+        <div class=" col-12 col-md-11 mx-auto  bm-page">
+
+            <div class="bm-header-primary">
+                <h5 class="">Customer lists<span class="float-end pe-3 badge bg-light text-primary"> Total: ${customers.length}</span></h5>
+            </div>
+            
+            <table class="table table-stripe ">
+                <thead class="thead">
+                    <tr>
+                        <th scope="col">Job</th>
+                        <th scope="col">Add</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Phone</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+        
+            customers.forEach(c => {
+                html += customerTemplateInner(c);
+            });
+
+
+    html += `  </tbody>
+            </table>`;
+
+    return html;
+}
+
+function customerTemplateInner(customer) {
+    let html = '';
+    html += `
+                <tr>
+                    <th scope="row">
+
+                        <button id="${customer.custId}" class="bg-transparent border-0" type="button" onclick="getJobsByCustomers(this.id)">
+                            <img class="pb-1" src="https://office.boxcar.site/public/assets/icons/folder-open-red.png" alt="open" width="24">
+                        </button>
+                    </td>
+
+                    <td id="">
+                        <button id="${customer.custId}" class="bg-transparent border-0" type="button" onclick="addJob(this.id)">
+                            <img class="pb-1" src="https://office.boxcar.site/public/assets/icons/add-doc-blue.png" alt="add" width="23">
+                        </button>
+                    </td> 
+
+                    <td>    
+                        <a href="#" type="button" onclick="fetchCustomerRecord(${customer.custId})" 
+                                class="text-decoration-none text-dark fw-semibold cursor-pointer ">
+                            <span class="bm-text-primary bm-hover">${customer.lname}, ${customer.fname}</span><br>
+                        </a>
+                    </td>  
+
+                    <td>${customer.address} ${customer.city}, ${customer.state.toUpperCase()}</td>
+
+                    <td>${customer.phone} </td>                   
+                </tr> 
+            </div>  
+            `;
+            
+    return html;
+}
 function htmlFetchAllCustomer(data){
 
     let html = `<div class="list-group">`;
@@ -77,7 +166,6 @@ function htmlFetchAllCustomer(data){
     return html;
 
 }
-
 
 function jobCard(data){
     let html = `
