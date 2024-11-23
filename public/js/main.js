@@ -5,8 +5,6 @@ let pre = `http://localhost:5200`;
 
 let customerRoot = el('#customerRoot');
 
-
-
 // customer card 
 async function fetchAllCustomers() {
     customerRoot.innerHTML = loader('primary', 'Fetching records now.')
@@ -24,6 +22,7 @@ async function fetchAllCustomers() {
         customerRoot.innerHTML = alertMessage('warning', networkError)      
     }
 }
+
 function htmlFetchAllCustomer(data){
 
     let html = `<div class="list-group">`;
