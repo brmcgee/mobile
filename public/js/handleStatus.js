@@ -1,32 +1,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function handleStatus(status){
 
     let arr = [];
@@ -66,18 +40,22 @@ function hideCardsFromArray (filteredArr) {
     })
 
 
+    let html = '';
+    let chips = document.querySelectorAll('.chip');
+    chips.forEach(c => {
+        if (jobIdArr.includes(c.id.slice(4))) { 
+            html += c.innerHTML;
+        }  
+    })
+    html += modal('Customer Contact');
+    html += modalAddCustomer('Add Customer');
+    customerRoot.innerHTML = html;
+    customerRoot.classList.add('bg-white')
 
-    // let chips = document.querySelectorAll('.chip');
-    // chips.forEach(c => {
-    //     if (!jobIdArr.includes(c.id.slice(4))) { 
-    //         c.style.display = 'none'
-    //     }  
-    // })
-    customerRoot.innerHTML = '';
-    console.log(filteredArr)
-     filteredArr.forEach(f => {
-        customerRoot.innerHTML += `status ${f.status} jobid ${f.jobId}<br>`
-     })
+    // console.log(filteredArr)
+    //  filteredArr.forEach(f => {
+    //     customerRoot.innerHTML += `status ${f.status} jobid ${f.jobId}<br>`
+    //  })
 
 
 

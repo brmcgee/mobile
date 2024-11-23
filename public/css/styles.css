@@ -9,9 +9,10 @@
 .modal-body {
     padding: 0;
     overflow-x: hidden;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(211, 224, 233);
     line-height: 17px;
     padding: 4px;
+    
 }
 .form-label, label {
     font-size: 14px;
@@ -57,7 +58,7 @@
     background-color: rgb(53, 53, 53);
 }
 .bm-bg-header {
-    background-color: rgb(53, 53, 53) ;
+    background-color: rgb(51, 34, 209) ;
 }
 .bg-red {
     background-color: #b91813;
@@ -103,12 +104,11 @@
 }
 
 .job-chip {
-      
-    padding: 0px;
-    padding-left: 3px;
+    background-color: #a7a7a7;
+    padding-left: 5px;
     padding-right: 3px;
     display: none;
-    width: 90%;
+    width: 100%;
     height: 80vh;
     transition: width 2s;
     overflow-y: auto;
@@ -118,7 +118,16 @@
 
 }
 .job-card {
-    margin-top: 5px;
-    border-radius: 0px;
+    margin-top: 6px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    /* border-top: 3px solid #4c6346;
+    border-right: 1px solid #4c6346;
+    border-left: 5px solid #4c6346; */
+    border-bottom: 2px solid #636161;
+    background-color: #f5f8f8;
+    box-shadow: 2px 2px 12px 2px #797777;
     
 }

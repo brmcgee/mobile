@@ -102,24 +102,26 @@ function jobCard(data){
     let count = 0;
     let html = `
     
-    <div id="jobCard${data.jobId}" class="job-card card mx-auto rounded-0" style="block">
+    <div id="jobCard${data.jobId}" class="job-card card mx-auto" style="block">
         <div class="card-body">
             <div id="jobId${data.jobId}" class="job-card-id d-none">${data.jobId}</div>
             <div id="stat${data.jobId}" class="job-card-stat d-none">${data.status}</div>
+                
+                <span class="float-end fs-6 badge bg-${getStatus(data.status).bg} text-${getStatus(data.status).text}">
+                     ${data.status}
+                </span>
+                <span class="float-end me-1 text-secondary">${data.jDate}</span>
 
-                <small class="mb-1 badge bg-${getStatus(data.status).bg} text-${getStatus(data.status).text} me-1" style="height:23px;">
-                    ${data.status}
-                </small>
-
-            <h5 class="card-title">${data.jName}
-            <span class="float-end">${data.jDate}</span></h5>
-            <p class="card-text m-0 p-0">Phone: ${data.jPhone}</p>
-            <p class="card-text m-0 p-0">${data.jAddress} - ${data.jCity}</p>
-            <p class="card-text m-0 p-0" id="status${data.jobId}">
+            <h5 class="card-title mb-0">${data.jName}</h5>
             
-            ${getStatus(data.status).img} ${data.status}</p>
-            <a href="${data.jImg || ''}" class="btn btn-light">Photo</a>
-            <a href="${data.jScope || ''}  " class="btn btn-light">Scope</a>
+            <p class="card-text m-0 p-0 ">Phone: ${data.jPhone || 'unavailable'}</p>
+            <p class="card-text m-0 p-0 text-secondary">${data.jAddress}</p>
+            <p class="card-text m-0 p-0 text-secondary">${data.jCity}, ${data.jState} ${data.jZip}</p>
+            <p class="card-text m-0 p-0" id="status${data.jobId}">${getStatus(data.status).img} 
+                <a href="${data.jImg || ''}" class="btn btn-light">Photo</a>
+                <a href="${data.jScope || ''}  " class="btn btn-light">Scope</a>
+            </p>  
+            
         </div>
         </div>
     `;
@@ -154,7 +156,7 @@ function modal(title){
         <div class="modal fade" id="customerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen mx-auto" style="max-width:44rem;">
             <div class="modal-content rounded-0 ">
-            <div class="modal-header bg-dark rounded-0 text-white">
+            <div class="modal-header rounded-0 text-white bm-bg-header">
                 <h1 class="modal-title fs-5" id="customerModalLabel">${title}</h1>
                 <button type="button" class="btn-close text-white bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -170,8 +172,8 @@ function fetchCustomerModal(target){
     let t = document.getElementById(target);
     let html = `
     
-    <div id="customerForm" class="m-0 p-0 mt-2">
-       <div class="add-customer col-12 mx-auto bm-page">
+    <div id="customerForm " class="m-0 p-0 mt-2">
+       <div class="add-customer col-12 mx-auto">
 
            <form action="" method="POST" id="addCustomer">           
    
@@ -239,12 +241,12 @@ function fetchCustomerModal(target){
    
                 <div class="row">
                     <div class="col-2"><label for="notes" class="form-label">Notes:</label></div>
-                    <div class="col-10"><textarea type="text" class="form-control" id="notes" placeholder="Notes" name="notes" rows="8"></textarea></div> 
+                    <div class="col-10"><textarea type="text" class="form-control" id="notes" placeholder="Notes" name="notes" rows="7"></textarea></div> 
                 </div>
 
                 <div class="row">
                     <div class="col-2"> <label for="img" class="form-label">Img:</label></div>
-                    <div class="col-10"> <input type="img" class="form-control" id="img"  name="img"></div>    
+                    <div class="col-10"> <input type="img" class="form-control" id="img"  name="img" style="font-size:12px;"></div>    
                 </div>
               
                 <div class="form-footer d-flex justify-content-end mt-2">
@@ -309,7 +311,7 @@ function modalAddCustomer(title){
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen mx-auto" style="max-width:44rem;" >
             <div class="modal-content rounded-0 ">
 
-            <div class="modal-header bg-dark rounded-0 text-white">
+            <div class="modal-header bm-bg-header rounded-0 text-white">
                 <h1 class="modal-title fs-5" id="customerModalLabel">${title}</h1>
                 <button type="button" class="btn-close text-white bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -386,12 +388,12 @@ function modalAddCustomer(title){
    
                 <div class="row">
                     <div class="col-2"><label for="notes" class="form-label">Notes:</label></div>
-                    <div class="col-10"><textarea type="text" class="form-control" id="notes" name="notes" rows="8"></textarea></div> 
+                    <div class="col-10"><textarea type="text" class="form-control" id="notes" name="notes" rows="7"></textarea></div> 
                 </div>
 
                 <div class="row">
                     <div class="col-2"> <label for="img" class="form-label">Img:</label></div>
-                    <div class="col-10"> <input type="img" class="form-control" id="img"  name="img"></div>    
+                    <div class="col-10"> <input type="img" class="form-control" id="img"  name="img" style="font-size:12px;"></div>    
                 </div>
 
 
