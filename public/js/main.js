@@ -1,14 +1,13 @@
-function el(target) {
-    return document.querySelector(target);
-}
+function el(target) { return document.querySelector(target); }
 
 let pre = `http://localhost:5200`; 
-pre = `https://office.boxcar.site`;
+// pre = `https://office.boxcar.site`;
 
 let customerRoot = el('#customerRoot');
 
 
 
+// customer card 
 async function fetchAllCustomers() {
     customerRoot.innerHTML = loader('primary', 'Fetching records now.')
     let url =`${pre}/records`;
@@ -25,7 +24,6 @@ async function fetchAllCustomers() {
         customerRoot.innerHTML = alertMessage('warning', networkError)      
     }
 }
-
 function htmlFetchAllCustomer(data){
 
     let html = `<div class="list-group">`;
@@ -82,6 +80,8 @@ function htmlFetchAllCustomer(data){
 
 }
 
+
+// job cards
 function jobCard(data){
     let html = `
     
@@ -119,49 +119,13 @@ function handleJobsBtnClick(custId){
 }
 
 
-function jobBtn(custId){
-    return ` <button onclick="handleJobsBtnClick(this.id)" id="${custId}" class="btn ms-2 text-black" type="button" 
-                     data-bs-toggle="modal" data-bs-target="#allJobsModal">
-                <img id="imgJobBtn${custId}" class="pb-1" src="public/assets/icons/leaderboard-green.png" alt="" width="25">
-                    <span id="spanJobBtn${custId}" >Jobs<span>
-            </button>`;
-}
-function customerBtn(custId){
-    return ` <button onclick="fetchCustomerModal('customerModalBody'), populateCustomerModal(${custId})" id="${custId}" class="btn ms-2 text-black" type="button"
-                data-bs-toggle="modal" data-bs-target="#customerModal">
-                <img class="pb-1" src="public/assets/icons/contact-green.png" alt="" width="25">
-                    Profile
-            </button>`;
-}
-function loader(type, message){
-    return `  
-    <div class="d-flex justify-content-center">
-        <div class="spinner-border text-${type}" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <h4 class="text-${type} ms-3">${message}</h4>
-    </div> 
-    `;
-}
-function alertMessage(type, message) {
-    return `
- 
-    <div class="alert alert-${type} alert-dismissible fade show" role="alert">
-        ${message}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>   
-    
-    
-    `;
-}
-
-
+// customer profile modal
 function modal(title){
     return `
         <div class="modal fade" id="customerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen mx-auto" style="max-width:44rem;">
             <div class="modal-content rounded-0 ">
-            <div class="modal-header bm-bg-header rounded-0 text-white">
+            <div class="modal-header bg-success rounded-0 text-white">
                 <h1 class="modal-title fs-5" id="customerModalLabel">${title}</h1>
                 <button type="button" class="btn-close text-white bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -173,16 +137,161 @@ function modal(title){
         </div>
     `;
 }
+function fetchCustomerModal(target){
+    let t = document.getElementById(target);
+    let html = `
+    
+    <div id="customerForm" class="m-0 p-0">
+       <div class="add-customer col-12 mx-auto bm-page">
+
+           <form action="" method="POST" id="addCustomer">
+   
+               <div class="row pb-2 pt-3">
+   
+                   <div class="col-sm-12 col-md-3">
+                       <label for="fname" class="form-label">First:</label>
+                       <input type="text" class="form-control" id="fname" name="fname" required>
+                   </div>
+           
+                   <div class="col-sm-12 col-md-3">
+                       <label for="lname" class="form-label">Last:</label>
+                       <input type="text" class="form-control" id="lname" name="lname" required>
+                   </div>
+   
+                   <div class="col-sm-8 col-md-4">
+                       <label for="date" class="form-label">Date:</label>
+                       <input type="date" class="form-control" id="date" required name="date">
+                   </div>
+
+                   <div class="col-sm-4 col-md-2">
+                       <label for="custId" hidden class="form-label">CustId:</label>
+                       <input type="text" hidden class="form-control" id="custId" value=""  name="custId" disabled>
+                   </div>
+   
+               </div>
+   
+               <div class="row pb-2">
+   
+                   <div class="col-12 col-sm-6">
+                       <label for="phone" class="form-label">Phone:</label>
+                       <input type="tel" class="form-control" id="phone" required placeholder="Format: 123-456-7890" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                   </div>
+   
+                   <div class="col-12 col-sm-6">
+                       <label for="cell" class="form-label">Cell:</label>
+                       <input type="tel" class="form-control" id="cell" placeholder="Format: 123-456-7890" name="cell" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                   </div>
+   
+   
+               </div>
+   
+               <div class="row pb-2">
+
+                   <div class="col-sm-12 col-md-6">
+                       <label for="address" class="form-label">Address:</label>
+                       <input type="text" class="form-control" id="address" required name="address">
+                   </div>
+
+                   <div class="col-sm-12 col-md-6">
+                       <label for="email" class="form-label">Email:</label>
+                       <input type="email" class="form-control" id="email" name="email">
+                   </div>
+      
+               </div>    
+               
+               <div class="row pb-2">
+                   <div class="col-sm-12 col-md-6">
+                       <label for="city" class="form-label">City:</label>
+                       <input type="text" class="form-control" id="city" name="city">
+                   </div>
+   
+                   <div class="col-sm-6 col-md-3">
+                       <label for="state" class="form-label">State:</label>
+                       <input type="text" class="form-control" id="state" name="state">
+                   </div>   
+                   
+                   <div class="col-sm-6 col-md-3">
+                       <label for="zip" class="form-label">Zip:</label>
+                       <input type="text" class="form-control" id="zip"  name="zip">
+                   </div>        
+               </div>
+   
+               <div class="row pb-2">
+                   <div class="col-sm-12">
+                       <label for="notes" class="form-label">Notes:</label>
+                       <textarea type="text" class="form-control" id="notes" placeholder="Notes" name="notes" rows="13"></textarea>
+                   </div>
+                   <div class="col-12">
+                        <label for="img" class="form-label">Img:</label>
+                       <input type="img" class="form-control" id="img"  name="img">
+                   </div>
+   
+   
+               </div>
+               <div class="form-footer d-flex justify-content-end">
+                   <button type="button" class="btn btn-danger me-1" data-bs-dismiss="modal">Close</button>
+                   <button type="button" onclick="handleUpdateCustomerRecord()" data-bs-dismiss="modal" class="btn btn-success">Save</button>
+               </div>
+   
+         </form>
+   
+       </div>
+   </div>   
+
+
+    `;
+    t.innerHTML = html;
+}
+function handleAddCustomer() {
+
+    let url = `${pre}/add-customer`;
+
+    let fname = document.getElementById('fname').value;
+    let lname = document.getElementById('lname').value;
+    let address = document.getElementById('address').value;
+    let city = document.getElementById('city').value;
+    let state = document.getElementById('state').value;
+    let zip = document.getElementById('zip').value;
+    let date = document.getElementById('date').value;
+    let notes = document.getElementById('notes').value;
+    let phone = document.getElementById('phone').value;
+    let cell = document.getElementById('cell').value;
+    let email = document.getElementById('email').value;
+    let custId = '';
+
+    if (fname == '' || lname == '' || address == '' || city == '' || state == '' || date == '' || phone == '') { alert('Enter job details'); return;}
+
+    let params = `fname=${fname}&&lname=${lname}&&address=${address}&&city=${city}&&state=${state}&&zip=${zip}&&date=${date}
+                    &&notes=${notes}&&phone=${phone}&&custId=${custId}&&cell=${cell}&&email=${email}`;
+    
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+
+            if (this.readyState == 4 && this.status == 200) {
+                customerRoot.innerHTML = `${alertMessage('primary', 'Successfully added contact!')}`
+                fetchAllCustomers();         
+            }
+      };
+      
+      xmlhttp.open("POST", url, true);
+      xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xmlhttp.send(params);
+
+
+}
+
+
+// add customer functions 
 function modalAddCustomer(title){
     return `
         <div class="modal fade" id="addCustomerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen mx-auto" style="max-width:44rem;" >
             <div class="modal-content rounded-0 ">
-            <div class="modal-header bm-bg-header rounded-0 text-white">
+            <div class="modal-header bg-success rounded-0 text-white">
                 <h1 class="modal-title fs-5" id="customerModalLabel">${title}</h1>
                 <button type="button" class="btn-close text-white bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-                <div class="modal-body" id="addCustomerModalBody">
+                <div class="modal-body" id="addCustomerModalBody" >
                  
     
     <div id="customerForm" class="m-0 p-0">
@@ -287,150 +396,6 @@ function modalAddCustomer(title){
         </div>
     `;
 }
-function handleAddCustomer() {
-
-    let url = `${pre}/add-customer`;
-
-    let fname = document.getElementById('fname').value;
-    let lname = document.getElementById('lname').value;
-    let address = document.getElementById('address').value;
-    let city = document.getElementById('city').value;
-    let state = document.getElementById('state').value;
-    let zip = document.getElementById('zip').value;
-    let date = document.getElementById('date').value;
-    let notes = document.getElementById('notes').value;
-    let phone = document.getElementById('phone').value;
-    let cell = document.getElementById('cell').value;
-    let email = document.getElementById('email').value;
-    let custId = '';
-
-    if (fname == '' || lname == '' || address == '' || city == '' || state == '' || date == '' || phone == '') { alert('Enter job details'); return;}
-
-    let params = `fname=${fname}&&lname=${lname}&&address=${address}&&city=${city}&&state=${state}&&zip=${zip}&&date=${date}
-                    &&notes=${notes}&&phone=${phone}&&custId=${custId}&&cell=${cell}&&email=${email}`;
-    
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-
-            if (this.readyState == 4 && this.status == 200) {
-                customerRoot.innerHTML = `${alertMessage('primary', 'Successfully added contact!')}`
-                fetchAllCustomers();         
-            }
-      };
-      
-      xmlhttp.open("POST", url, true);
-      xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-      xmlhttp.send(params);
-
-
-}
-
-function fetchCustomerModal(target){
-    let t = document.getElementById(target);
-    let html = `
-    
-    <div id="customerForm" class="m-0 p-0">
-       <div class="add-customer col-12 mx-auto bm-page">
-
-           <form action="" method="POST" id="addCustomer">
-   
-               <div class="row pb-2 pt-3">
-   
-                   <div class="col-sm-12 col-md-3">
-                       <label for="fname" class="form-label">First:</label>
-                       <input type="text" class="form-control" id="fname" name="fname" required>
-                   </div>
-           
-                   <div class="col-sm-12 col-md-3">
-                       <label for="lname" class="form-label">Last:</label>
-                       <input type="text" class="form-control" id="lname" name="lname" required>
-                   </div>
-   
-                   <div class="col-sm-8 col-md-4">
-                       <label for="date" class="form-label">Date:</label>
-                       <input type="date" class="form-control" id="date" required name="date">
-                   </div>
-
-                   <div class="col-sm-4 col-md-2">
-                       <label for="custId" hidden class="form-label">CustId:</label>
-                       <input type="text" hidden class="form-control" id="custId" value=""  name="custId" disabled>
-                   </div>
-   
-               </div>
-   
-               <div class="row pb-2">
-   
-                   <div class="col-12 col-sm-6">
-                       <label for="phone" class="form-label">Phone:</label>
-                       <input type="tel" class="form-control" id="phone" required placeholder="Format: 123-456-7890" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
-                   </div>
-   
-                   <div class="col-12 col-sm-6">
-                       <label for="cell" class="form-label">Cell:</label>
-                       <input type="tel" class="form-control" id="cell" placeholder="Format: 123-456-7890" name="cell" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
-                   </div>
-   
-   
-               </div>
-   
-               <div class="row pb-2">
-
-                   <div class="col-sm-12 col-md-6">
-                       <label for="address" class="form-label">Address:</label>
-                       <input type="text" class="form-control" id="address" required name="address">
-                   </div>
-
-                   <div class="col-sm-12 col-md-6">
-                       <label for="email" class="form-label">Email:</label>
-                       <input type="email" class="form-control" id="email" name="email">
-                   </div>
-      
-               </div>    
-               
-               <div class="row pb-2">
-                   <div class="col-sm-12 col-md-6">
-                       <label for="city" class="form-label">City:</label>
-                       <input type="text" class="form-control" id="city" name="city">
-                   </div>
-   
-                   <div class="col-sm-6 col-md-3">
-                       <label for="state" class="form-label">State:</label>
-                       <input type="text" class="form-control" id="state" name="state">
-                   </div>   
-                   
-                   <div class="col-sm-6 col-md-3">
-                       <label for="zip" class="form-label">Zip:</label>
-                       <input type="text" class="form-control" id="zip"  name="zip">
-                   </div>        
-               </div>
-   
-               <div class="row pb-2">
-                   <div class="col-sm-12">
-                       <label for="notes" class="form-label">Notes:</label>
-                       <textarea type="text" class="form-control" id="notes" placeholder="Notes" name="notes" rows="13"></textarea>
-                   </div>
-                   <div class="col-12">
-                        <label for="img" class="form-label">Img:</label>
-                       <input type="img" class="form-control" id="img"  name="img">
-                   </div>
-   
-   
-               </div>
-               <div class="form-footer d-flex justify-content-end">
-                   <button type="button" class="btn btn-danger me-1" data-bs-dismiss="modal">Close</button>
-                   <button type="button" class="btn btn-secondary me-1" onclick="clearCustomerForm()">Clear</button>
-                   <button type="button" onclick="handleUpdateCustomerRecord()" data-bs-dismiss="modal" class="btn btn-success">Save</button>
-               </div>
-   
-         </form>
-   
-       </div>
-   </div>   
-
-
-    `;
-    t.innerHTML = html;
-}
 async function populateCustomerModal(custId) {
     
     let url = `${pre}/customers/${custId}`
@@ -461,7 +426,6 @@ function handlePopulateCustomerModal(data) {
     el('#date').value = data[0].date;
     el('#img').value = data[0].img;
 }
-
 function handleUpdateCustomerRecord() {
 
 
@@ -500,6 +464,44 @@ function handleUpdateCustomerRecord() {
                         
 
 }
+
+
+// utilities
+function jobBtn(custId){
+    return ` <button onclick="handleJobsBtnClick(this.id)" id="${custId}" class="btn ms-2 text-black" type="button" 
+                     data-bs-toggle="modal" data-bs-target="#allJobsModal">
+                <img id="imgJobBtn${custId}" class="pb-1" src="public/assets/icons/leaderboard-green.png" alt="" width="25">
+                    <span id="spanJobBtn${custId}" >Jobs<span>
+            </button>`;
+}
+function customerBtn(custId){
+    return ` <button onclick="fetchCustomerModal('customerModalBody'), populateCustomerModal(${custId})" id="${custId}" class="btn ms-2 text-black" type="button"
+                data-bs-toggle="modal" data-bs-target="#customerModal">
+                <img class="pb-1" src="public/assets/icons/contact-green.png" alt="" width="25">
+                    Profile
+            </button>`;
+}
+function loader(type, message){
+    return `  
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border text-${type}" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <h4 class="text-${type} ms-3">${message}</h4>
+    </div> 
+    `;
+}
+function alertMessage(type, message) {
+    return `
+ 
+    <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>   
+    
+    
+    `;
+}
 function clearCustomerForm() {
     el('#fname').value = '';
     el('#lname').value = '';
@@ -536,4 +538,6 @@ function getIcon(status){
 
 }
 
+
+//startup
 document.addEventListener("DOMContentLoaded", fetchAllCustomers())
