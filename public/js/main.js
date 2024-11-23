@@ -1,7 +1,7 @@
 function el(target) { return document.querySelector(target); }
 
 let pre = `http://localhost:5200`; 
-pre = `https://office.boxcar.site`;
+// pre = `https://office.boxcar.site`;
 
 let customerRoot = el('#customerRoot');
 
@@ -83,21 +83,26 @@ function htmlFetchAllCustomer(data){
 
 // job cards
 function jobCard(data){
+    let count = 0;
     let html = `
     
-    <div class="job-card card mx-auto rounded-0">
-        <div class="card-body ">
+    <div id="jobCard${data.jobId}" class="job-card card mx-auto rounded-0" style="block">
+        <div class="card-body">
+
+            <div id="jobId${data.jobId}" class="job-card-id">${data.jobId}</div>
+            <div id="stat${data.jobId}" class="job-card-stat">${data.status}</div>
+
             <h5 class="card-title">${data.jName}
             <span class="float-end">${data.jDate}</span></h5>
             <p class="card-text m-0 p-0">Phone: ${data.jPhone}</p>
             <p class="card-text m-0 p-0">${data.jAddress} - ${data.jCity}</p>
-            <p class="card-text m-0 p-0">${getIcon(data.status)}${data.status}</p>
+            <p class="card-text m-0 p-0" id="status${data.jobId}">${getIcon(data.status)}${data.status}</p>
             <a href="${data.jImg || ''}">Img</a>
             <a href="${data.jScope || ''}  ">Scope</a>
         </div>
         </div>
-    
     `;
+    
     return html;
 }
 function handleJobsBtnClick(custId){
@@ -112,6 +117,7 @@ function handleJobsBtnClick(custId){
             jobChipElem.style.display = 'block';
             jobChipElem.scrollIntoView();
             document.getElementById(`chip${custId}`).scrollIntoView();
+            document.querySelector('.navbar').scrollIntoView()
             document.getElementById(`imgJobBtn${custId}`).src = "public/assets/icons/close-blue.png";
             document.getElementById(`spanJobBtn${custId}`).innerHTML = 'Close';
             
@@ -210,7 +216,7 @@ function fetchCustomerModal(target){
    
                 <div class="row">
                     <div class="col-2"><label for="notes" class="form-label">Notes:</label></div>
-                    <div class="col-10"><textarea type="text" class="form-control" id="notes" placeholder="Notes" name="notes" rows="10"></textarea></div> 
+                    <div class="col-10"><textarea type="text" class="form-control" id="notes" placeholder="Notes" name="notes" rows="8"></textarea></div> 
                 </div>
 
                 <div class="row">
@@ -357,7 +363,7 @@ function modalAddCustomer(title){
    
                 <div class="row">
                     <div class="col-2"><label for="notes" class="form-label">Notes:</label></div>
-                    <div class="col-10"><textarea type="text" class="form-control" id="notes" name="notes" rows="10"></textarea></div> 
+                    <div class="col-10"><textarea type="text" class="form-control" id="notes" name="notes" rows="8"></textarea></div> 
                 </div>
 
                 <div class="row">

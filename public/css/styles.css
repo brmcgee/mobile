@@ -24,7 +24,7 @@
     
 }
 .form-control {
-    font-size: 17px;
+    font-size: 16px;
     border: 1px solid #adbcc7;
     background-color: rgb(245, 249, 252) ;
     box-shadow: 1px 0px 1px 1px #ccd8e7;
@@ -70,7 +70,7 @@
     overflow: hidden;
 }
 .notification {
-    height: 5vh;
+    height: 4vh;
     width: 100%;
     /* background-color: rgb(218, 249, 252); */
 }
@@ -81,7 +81,7 @@
 }
 .customer-root {
     height: 41vh;
-    height: 94vh;
+    height: 93vh;
     width: 100%;
     overflow-y: scroll;
     background-color: rgb(223, 223, 223);  
