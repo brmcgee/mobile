@@ -110,13 +110,13 @@ function jobCard(data){
                 <span class="float-end fs-6 badge bg-${getStatus(data.status).bg} text-${getStatus(data.status).text}">
                      ${data.status}
                 </span>
-                <span class="float-end me-1 text-secondary">${data.jDate}</span>
+                <span class="float-end me-2">${data.jDate}</span>
 
-            <h5 class="card-title mb-0">${data.jName}</h5>
+            <h5 class="card-title mb-0">${data.jName.toUpperCase()}</h5>
             
             <p class="card-text m-0 p-0 ">Phone: ${data.jPhone || 'unavailable'}</p>
-            <p class="card-text m-0 p-0 text-secondary">${data.jAddress}</p>
-            <p class="card-text m-0 p-0 text-secondary">${data.jCity}, ${data.jState} ${data.jZip}</p>
+            <p class="card-text m-0 p-0">${data.jAddress}</p>
+            <p class="card-text m-0 p-0">${data.jCity}, ${data.jState} ${data.jZip}</p>
             <p class="card-text m-0 p-0" id="status${data.jobId}">${getStatus(data.status).img} 
                 <a href="${data.jImg || ''}" class="btn btn-light">Photo</a>
                 <a href="${data.jScope || ''}  " class="btn btn-light">Scope</a>

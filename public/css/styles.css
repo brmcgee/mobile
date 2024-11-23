@@ -58,7 +58,7 @@
     background-color: rgb(53, 53, 53);
 }
 .bm-bg-header {
-    background-color: rgb(51, 34, 209) ;
+    background-color: rgb(15, 15, 15) ;
 }
 .bg-red {
     background-color: #b91813;
@@ -118,7 +118,7 @@
 
 }
 .job-card {
-    margin-top: 6px;
+    margin-top: 4px;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
     border-top-left-radius: 10px;
@@ -126,8 +126,9 @@
     /* border-top: 3px solid #4c6346;
     border-right: 1px solid #4c6346;
     border-left: 5px solid #4c6346; */
-    border-bottom: 2px solid #636161;
+    /* border-bottom: 2px solid #636161; */
     background-color: #f5f8f8;
-    box-shadow: 2px 2px 12px 2px #797777;
+    border: 1px solid rgb(134, 134, 134);
+    /* box-shadow: 2px 2px 12px 2px #797777; */
     
 }
