@@ -246,12 +246,12 @@ function fetchCustomerModal(target){
 
                 <div class="row">
                     <div class="col-2"> <label for="img" class="form-label">Img:</label></div>
-                    <div class="col-10"> <input type="img" class="form-control" id="img"  name="img" style="font-size:12px;"></div>    
+                    <div class="col-10"> <input type="img" class="form-control" id="img"  name="img"></div>    
                 </div>
               
                 <div class="form-footer d-flex justify-content-end mt-2">
-                   <button type="button" class="btn btn-danger me-1" data-bs-dismiss="modal">Close</button>
-                   <button type="button" onclick="handleUpdateCustomerRecord()" data-bs-dismiss="modal" class="btn btn-success">Save</button>
+                   <button type="button" class="btn btn-sm btn-danger me-1" data-bs-dismiss="modal">Close</button>
+                   <button type="button" onclick="handleUpdateCustomerRecord()" data-bs-dismiss="modal" class="btn btn-sm btn-success">Save</button>
                 </div>
    
          </form>
@@ -393,14 +393,14 @@ function modalAddCustomer(title){
 
                 <div class="row">
                     <div class="col-2"> <label for="img" class="form-label">Img:</label></div>
-                    <div class="col-10"> <input type="img" class="form-control" id="img"  name="img" style="font-size:12px;"></div>    
+                    <div class="col-10"> <input type="img" class="form-control" id="img"  name="img"></div>    
                 </div>
 
 
                <div class="form-footer d-flex justify-content-end mt-2">
-                   <button type="button" class="btn btn-danger me-1" data-bs-dismiss="modal">Close</button>
-                   <button type="button" class="btn btn-secondary me-1" onclick="clearCustomerForm()">Clear</button>
-                   <button type="button" onclick="handleAddCustomer()" data-bs-dismiss="modal" class="btn btn-success">Submit</button>
+                   <button type="button" class="btn btn-sm btn-danger  me-1" data-bs-dismiss="modal">Close</button>
+                   <button type="button" class="btn btn-sm btn-secondary me-1" onclick="clearCustomerForm()">Clear</button>
+                   <button type="button" onclick="handleAddCustomer()" data-bs-dismiss="modal" class="btn btn-sm btn-success">Submit</button>
                </div>
    
          </form>
