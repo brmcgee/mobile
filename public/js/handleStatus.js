@@ -1,3 +1,32 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function handleStatus(status){
 
     let arr = [];
@@ -29,7 +58,6 @@ function handleStatus(status){
 
     hideCardsFromArray (filteredArr)
 }
-
 function hideCardsFromArray (filteredArr) {
     
     let jobIdArr = [];
@@ -50,6 +78,8 @@ function hideCardsFromArray (filteredArr) {
      filteredArr.forEach(f => {
         customerRoot.innerHTML += `status ${f.status} jobid ${f.jobId}<br>`
      })
+
+
 
 }
 

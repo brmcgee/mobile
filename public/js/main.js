@@ -79,30 +79,7 @@ function htmlFetchAllCustomer(data){
 
 }
 
-// job cards within customer card
-function jobCard(data){
-    let count = 0;
-    let html = `
-    
-    <div id="jobCard${data.jobId}" class="job-card card mx-auto rounded-0" style="block">
-        <div class="card-body">
-
-            <div id="jobId${data.jobId}" class="job-card-id">${data.jobId}</div>
-            <div id="stat${data.jobId}" class="job-card-stat">${data.status}</div>
-
-            <h5 class="card-title">${data.jName}
-            <span class="float-end">${data.jDate}</span></h5>
-            <p class="card-text m-0 p-0">Phone: ${data.jPhone}</p>
-            <p class="card-text m-0 p-0">${data.jAddress} - ${data.jCity}</p>
-            <p class="card-text m-0 p-0" id="status${data.jobId}">${getIcon(data.status)}${data.status}</p>
-            <a href="${data.jImg || ''}">Img</a>
-            <a href="${data.jScope || ''}  ">Scope</a>
-        </div>
-        </div>
-    `;
-    
-    return html;
-}
+// job cards 
 function handleJobsBtnClick(custId){
     let jobChipElem = document.getElementById(`jobChip${custId}`);
 
@@ -121,9 +98,35 @@ function handleJobsBtnClick(custId){
             
     }
 }
+function jobCard(data){
+    let count = 0;
+    let html = `
+    
+    <div id="jobCard${data.jobId}" class="job-card card mx-auto rounded-0" style="block">
+        <div class="card-body">
+            <div id="jobId${data.jobId}" class="job-card-id d-none">${data.jobId}</div>
+            <div id="stat${data.jobId}" class="job-card-stat d-none">${data.status}</div>
 
+                <small class="mb-1 badge bg-${getStatus(data.status).bg} text-${getStatus(data.status).text} me-1" style="height:23px;">
+                    ${data.status}
+                </small>
 
-// job card  
+            <h5 class="card-title">${data.jName}
+            <span class="float-end">${data.jDate}</span></h5>
+            <p class="card-text m-0 p-0">Phone: ${data.jPhone}</p>
+            <p class="card-text m-0 p-0">${data.jAddress} - ${data.jCity}</p>
+            <p class="card-text m-0 p-0" id="status${data.jobId}">
+            
+            ${getStatus(data.status).img} ${data.status}</p>
+            <a href="${data.jImg || ''}" class="btn btn-light">Photo</a>
+            <a href="${data.jScope || ''}  " class="btn btn-light">Scope</a>
+        </div>
+        </div>
+    `;
+    
+    return html;
+}
+// job card  fetch
 async function fetchAllJobs() {
     customerRoot.innerHTML = loader('primary', 'Fetching jobs now.')
     let url =`${pre}/jobs`;
@@ -131,7 +134,8 @@ async function fetchAllJobs() {
         let response = await fetch(url);
         try {
             let data = await response.json()
-            customerRoot.innerHTML = htmlFetchAllJobs(data);
+            customerRoot.innerHTML = '';
+            data.forEach(d => { customerRoot.innerHTML += jobCard(d)})
 
         } catch (parseError) {
             customerRoot.innerHTML = alertMessage('warning', parseError)
@@ -140,52 +144,6 @@ async function fetchAllJobs() {
         customerRoot.innerHTML = alertMessage('warning', networkError)      
     }
 }
-function htmlFetchAllJobs(data){
-
-    let html = `<div class="list-group">`;
-
-    // chip 
-    data.forEach(d => {
-        html += `
-        <div class="chip shadow " id="chip${d.jobId}">
-            <a href="#" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-between align-items-center">
-
-                    <div class="d-flex align-items-center"> 
-                        <small class="badge bg-${getStatus(d.status).bg} text-${getStatus(d.status).text} me-1" style="height:23px;">
-                            ${d.status}
-                        </small> 
-                        <p class="h6 m-0 p-0 ms-2 pt-1">${d.jName} </p>
-                    </div>
-                    
-                    <small class="text-secondary">${d.jDate}</small>
-                    
-
-
-                </div>
-
-                <p class="m-0 pt-1">Phone: ${d.jPhone || 'n/a'}</p>
-                <p class="m-0">${d.jAddress}</p>
-                
-                <small class="text-secondary">${d.jCity}, ${d.jState} ${d.jZip}
-                   <span class="float-end"> ${customerBtn(d.custId)} <span class="mb-2">${getStatus(d.status).img}</span></span>
-                </small> <br>     
-            
-            <div class="p-1"></div>
-
-           
-            </a> 
-        </div>    
-    `
-    })
-
-    html += `</div>`;
-    html += modal('Customer Contact');
-    html += modalAddCustomer('Add Customer');
-    return html;
-
-}
-
 
 
 
