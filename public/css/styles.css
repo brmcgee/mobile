@@ -17,8 +17,9 @@
     font-size: 15px;
 }
 .navbar {
-    height:7vh;
+    height:8vh;
     background-color: rgb(28, 129, 19);
+    background-color: rgb(53, 53, 53);
 }
 .app {
     max-width: 39rem ;
@@ -27,7 +28,7 @@
     background-color: rgb(255, 255, 255);
 }
 .wrapper {
-    height: 93vh;
+    height: 92vh;
     overflow: hidden;
 }
 .notification {
