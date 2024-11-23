@@ -59,6 +59,18 @@
 .bm-bg-header {
     background-color: rgb(53, 53, 53) ;
 }
+.bg-red {
+    background-color: #b91813;
+}
+.bg-purple {
+    background-color: #870c8b;
+}
+.bg-blue {
+    background-color: #0c2a8b;
+}
+.bg-pink {
+    background-color: #d81fa0;
+}
 .app {
     max-width: 44rem ;
     width: 100vw;

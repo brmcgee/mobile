@@ -1,7 +1,7 @@
 function el(target) { return document.querySelector(target); }
 
 let pre = `http://localhost:5200`; 
-// pre = `https://office.boxcar.site`;
+pre = `https://office.boxcar.site`;
 
 let customerRoot = el('#customerRoot');
 
@@ -79,8 +79,7 @@ function htmlFetchAllCustomer(data){
 
 }
 
-
-// job cards
+// job cards within customer card
 function jobCard(data){
     let count = 0;
     let html = `
@@ -122,6 +121,73 @@ function handleJobsBtnClick(custId){
             
     }
 }
+
+
+// job card  
+async function fetchAllJobs() {
+    customerRoot.innerHTML = loader('primary', 'Fetching jobs now.')
+    let url =`${pre}/jobs`;
+    try {
+        let response = await fetch(url);
+        try {
+            let data = await response.json()
+            customerRoot.innerHTML = htmlFetchAllJobs(data);
+
+        } catch (parseError) {
+            customerRoot.innerHTML = alertMessage('warning', parseError)
+        }
+    } catch (networkError) {
+        customerRoot.innerHTML = alertMessage('warning', networkError)      
+    }
+}
+function htmlFetchAllJobs(data){
+
+    let html = `<div class="list-group">`;
+
+    // chip 
+    data.forEach(d => {
+        html += `
+        <div class="chip shadow " id="chip${d.jobId}">
+            <a href="#" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+
+                    <div class="d-flex align-items-center"> 
+                        <small class="badge bg-${getStatus(d.status).bg} text-${getStatus(d.status).text} me-1" style="height:23px;">
+                            ${d.status}
+                        </small> 
+                        <p class="h6 m-0 p-0 ms-2 pt-1">${d.jName} </p>
+                    </div>
+                    
+                    <small class="text-secondary">${d.jDate}</small>
+                    
+
+
+                </div>
+
+                <p class="m-0 pt-1">Phone: ${d.jPhone || 'n/a'}</p>
+                <p class="m-0">${d.jAddress}</p>
+                
+                <small class="text-secondary">${d.jCity}, ${d.jState} ${d.jZip}
+                   <span class="float-end"> ${customerBtn(d.custId)} <span class="mb-2">${getStatus(d.status).img}</span></span>
+                </small> <br>     
+            
+            <div class="p-1"></div>
+
+           
+            </a> 
+        </div>    
+    `
+    })
+
+    html += `</div>`;
+    html += modal('Customer Contact');
+    html += modalAddCustomer('Add Customer');
+    return html;
+
+}
+
+
+
 
 
 // customer profile modal
@@ -460,7 +526,46 @@ function handleUpdateCustomerRecord() {
 }
 
 
-// utilities'
+// utilities
+function getStatus(status) {
+ 
+    if (status == 'Scheduled') {
+        return {'bg': 'red',
+                'text' : 'light',
+                'img' : '<img class="" src="https://office.boxcar.site/public/assets/icons/schedule-r.png" alt="" width="25">'
+                };
+    }
+    if (status == 'Ordered') {
+        return {'bg': 'purple',
+                'text' : 'light',
+                'img' : '<img class="" src="https://office.boxcar.site/public/assets/icons/order-p.png" alt="" width="25">'
+                };
+    }
+    if (status == 'In-Progress') {
+        return {'bg': 'blue',
+                'text' : 'light',
+                'img' : '<img class="" src="https://office.boxcar.site/public/assets/icons/in-progress-b.png" alt="" width="25">'
+                };
+    }
+    if (status == 'Estimate') {
+        return {'bg': 'pink',
+                'text' : 'light',
+                'img' : '<img class="" src="https://office.boxcar.site/public/assets/icons/contract-pink.png" alt="" width="25">'
+                };
+    }
+    if (status == 'Completed') {
+        return {'bg': 'success',
+            'text' : 'light',
+            'img' : '<img class="" src="https://office.boxcar.site/public/assets/icons/done-green.png" alt="" width="25">'
+            };
+    } else {
+        return {'bg': 'info',
+                'text' : 'dark',
+                'img' : '<img class="" src="https://office.boxcar.site/public/assets/icons/error-red.png" alt="" width="25">'
+                };
+    }
+
+}
 function getCurrentTime(){
     const date = new Date();
     let day = date.getDate();
@@ -520,21 +625,21 @@ function clearCustomerForm() {
 function getIcon(status){
 
     if (status == 'Scheduled') {
-        return '<img class="pe-1 pb-1" src="https://office.boxcar.site/public/assets/icons/schedule-r.png" alt="" width="25">';
+        return '<img class="pe-1 pb-1" src="https://office.boxcar.site/public/assets/icons/schedule-r.png" alt="" width="32">';
     }
     if (status == 'Ordered') {
-        return '<img class="pe-1 pb-1" src="https://office.boxcar.site/public/assets/icons/order-p.png" alt="" width="25">';
+        return '<img class="pe-1 pb-1" src="https://office.boxcar.site/public/assets/icons/order-p.png" alt="" width="32">';
     }
     if (status == 'In-Progress') {
-        return '<img class="pe-1 pb-1" src="https://office.boxcar.site/public/assets/icons/in-progress-b.png" alt="" width="25">';
+        return '<img class="pe-1 pb-1" src="https://office.boxcar.site/public/assets/icons/in-progress-b.png" alt="" width="32">';
     }
     if (status == 'Estimate') {
-        return '<img class="pe-1 pb-1" src="https://office.boxcar.site/public/assets/icons/contract-pink.png" alt="" width="25">';
+        return '<img class="pe-1 pb-1" src="https://office.boxcar.site/public/assets/icons/contract-pink.png" alt="" width="32">';
     }
     if (status == 'Completed') {
-        return '<img class="pe-1 pb-1" src="https://office.boxcar.site/public/assets/icons/done-green.png" alt="" width="25">';
+        return '<img class="pe-1 pb-1" src="https://office.boxcar.site/public/assets/icons/done-green.png" alt="" width="32">';
     } else {
-        return '<img class="pe-1 pb-1" src="https://office.boxcar.site/public/assets/icons/error-red.png" alt="" width="25">';
+        return '<img class="pe-1 pb-1" src="https://office.boxcar.site/public/assets/icons/error-red.png" alt="" width="32">';
     }
 
 
