@@ -25,29 +25,6 @@ async function fetchAllCustomers() {
         customerRoot.innerHTML = alertMessage('warning', networkError)      
     }
 }
-async function handleSearchLastName(query) {
-    if (query == '') { 
-        customerRoot.innerHTML = '';
-        document.getElementById('searchBar').value = '';
-        return; 
-    }
-
-    let url = `${pre}/lname/${query}`;
-    let params = `query=${query}`;
-    var xmlhttp = new XMLHttpRequest();
-    
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            let data = JSON.parse(this.response)
-            customerRoot.innerHTML =  customerTemplate(data);
-        }
-      };
-      
-      xmlhttp.open("POST", url, true);
-      xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-      xmlhttp.send(params);
-      if (query == '') { customerRoot.innerHTML = ''; return; }
-}
 
 function customerTemplate(customers) {
     let html = '';
@@ -125,11 +102,14 @@ function htmlFetchAllCustomer(data){
         <div class="chip shadow " id="chip${d.custId}">
             <a href="#" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
+
                     <h5 class="mb-1"> 
-                        <span class="badge bg-green me-1">
-                            ${d.jobs.length}
-                        </span> 
-                        ${d.fname} ${d.lname}
+                    <span class="badge bg-green me-1">
+                         ${d.jobs.length}
+                    </span> ${d.fname} 
+                    <span class="lname h5" id=${d.custId}>
+                        ${d.lname}
+                    </span>
                     </h5>
 
                     <small class="text-secondary">${d.date}</small>
@@ -239,27 +219,27 @@ function alertMessage(type, message) {
     
     `;
 }
-function modal(title){
-    return `
-        <div class="modal fade" id="allJobsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="allJobsModalLabel">${title}</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="allJobsModalBody">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
-            </div>
-            </div>
-        </div>
-        </div>
-    `;
-}
+// function modal(title){
+//     return `
+//         <div class="modal fade" id="allJobsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+//         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+//             <div class="modal-content">
+//             <div class="modal-header">
+//                 <h1 class="modal-title fs-5" id="allJobsModalLabel">${title}</h1>
+//                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+//             </div>
+//             <div class="modal-body" id="allJobsModalBody">
+//                 ...
+//             </div>
+//             <div class="modal-footer">
+//                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+//                 <button type="button" class="btn btn-primary">Understood</button>
+//             </div>
+//             </div>
+//         </div>
+//         </div>
+//     `;
+// }
 function getIcon(status){
 
     if (status == 'Scheduled') {
