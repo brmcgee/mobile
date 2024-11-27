@@ -1,7 +1,7 @@
 function el(target) { return document.querySelector(target); }
 
 let pre = `http://localhost:5200`; 
-pre = `https://office.boxcar.site`;
+
 
 let customerRoot = el('#customerRoot');
 
