@@ -20,7 +20,7 @@
 
   </head>
   <body class="bg-secondary">
-    
+    <div id="menu"></div>
     <div class="app">
         <nav class="navbar navbar-dark bm-bg-header ">
             <div class="container">
@@ -128,6 +128,13 @@
     <script src="public/js/main.js"></script>
     <script src="public/js/handleSearch.js"></script>
     <script src="public/js/handleStatus.js"></script>
+
+    <script>
+      if (pre == `http://localhost:5200`) { 
+        document.getElementById('menu').innerHTML += `<small class="text-danger float-end ms-2 pt-3 "> ${pre} @ dev_server </small>`;
+        document.getElementById('menu').style.backgroundColor = '#ecb8b8'
+      }
+    </script>
 
   </body>
 </html>
